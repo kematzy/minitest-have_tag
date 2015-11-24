@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Kematzy"]
   spec.email         = ["kematzy@gmail.com"]
 
-  spec.summary       = %q{Ministest assertions for testing HTML output}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = %q{Minitest assertions for testing HTML output}
+  spec.description   = %q{Adds Minitest assertion for testing HTML output, including contents, within a provided string}
   spec.homepage      = 'http://github.com/kematzy/minitest-have_tag'
   spec.license       = 'MIT'
 
