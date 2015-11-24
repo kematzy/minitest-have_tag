@@ -7,15 +7,15 @@ Currently adds the following methods:
 
 ### Minitest::Assertions
 
-#### `:assert_have_tag(actual, expected, contents = nil, msg = nil)`
+*  **`:assert_have_tag(actual, expected, contents = nil, msg = nil)`**
 
-#### `:refute_have_tag(actual, expected, contents = nil, msg = nil)`
+* **`:refute_have_tag(actual, expected, contents = nil, msg = nil)`**
 
 ### Minitest::Expectations
 
-#### `actual.must_have_tag(expected, contents = nil, msg = nil)`
+* **actual.`must_have_tag(expected, contents = nil, msg = nil)`**
 
-#### `actual.wont_have_tag(expected, contents = nil, msg = nil)`
+* **actual.`wont_have_tag(expected, contents = nil, msg = nil)`**
 
 <br>
 ---
@@ -60,6 +60,8 @@ Adding the above to your `spec_helper.rb` file automatically adds the key helper
 `Minitest::Assertions` to test for existence of HTML tag, including contents, within the provided 
 String.
 
+<br>
+
 ### `assert_have_tag()`
 
 ```ruby
@@ -96,6 +98,7 @@ Produces an extensive error message when something is wrong
    #=> 'Expected "<br>" to have tag ["brr"], but no such tag was found'
 ```
 
+<br>
 
 ### `:refute_have_tag()`
   
@@ -136,6 +139,7 @@ Produces an extensive error message when something is wrong:
 
 
 <br>
+--- 
 
 ## Dependencies
 
