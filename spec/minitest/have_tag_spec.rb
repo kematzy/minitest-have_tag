@@ -149,7 +149,7 @@ describe Minitest::Spec do
     it 'should handle a basic <label...> tag with for attribute and empty contents' do
       assert_no_error { assert_have_tag(%Q{<label for="name"></label>}, 'label[for=name]', '') }
       
-      assert_returns_error('Expected "<label for=\\"name\\">contents</label>" to have tag ["label[for=name]"] with contents [""], but the tag content is [contents]') do
+      assert_returns_error('Expected "<label for=\\"name\\">contents</label>" to have tag ["label[for=name]"] with contents [""], but the tags content found is [contents]') do
         assert_have_tag(%Q{<label for="name">contents</label>}, 'label[for=name]', '')
       end
       # ===
@@ -169,7 +169,7 @@ describe Minitest::Spec do
     
     it 'should handle a basic <label...> tag with inner_html and empty contents' do
       e = "Expected \"<label for=\\\"name\\\">Username:</label>\" to have tag [\"label[for=name]\"]"
-      e << " with contents [\"\"], but the tag content is [Username:]"
+      e << " with contents [\"\"], but the tags content found is [Username:]"
       assert_returns_error(e) do
         assert_have_tag(%Q{<label for="name">Username:</label>}, 'label[for=name]', '')
       end
@@ -236,7 +236,10 @@ describe Minitest::Spec do
       assert_no_error { refute_have_tag(%Q{<label for="name">Username:</label>}, 'label[for=name]', /users/i) }
       
     end
-    
+
+    it 'should handle first matching tag with content when more then one tag found' do
+      assert_no_error { assert_have_tag(%Q{<tag>content1</tag><tag>content2</tag>}, 'tag', 'content1') }
+    end
   end
   
   
@@ -378,7 +381,7 @@ describe Minitest::Spec do
     it 'should handle a basic <label...> tag with for attribute and empty contents' do
       assert_no_error { %Q{<label for="name"></label>}.must_have_tag('label[for=name]', '') }
       
-      assert_returns_error('Expected "<label for=\\"name\\">contents</label>" to have tag ["label[for=name]"] with contents [""], but the tag content is [contents]') do
+      assert_returns_error('Expected "<label for=\\"name\\">contents</label>" to have tag ["label[for=name]"] with contents [""], but the tags content found is [contents]') do
         %Q{<label for="name">contents</label>}.must_have_tag('label[for=name]', '')
       end
       # ===
@@ -398,7 +401,7 @@ describe Minitest::Spec do
     
     it 'should handle a basic <label...> tag with inner_html and empty contents' do
       e = "Expected \"<label for=\\\"name\\\">Username:</label>\" to have tag [\"label[for=name]\"]"
-      e << " with contents [\"\"], but the tag content is [Username:]"
+      e << " with contents [\"\"], but the tags content found is [Username:]"
       assert_returns_error(e) do
         %Q{<label for="name">Username:</label>}.must_have_tag('label[for=name]', '')
       end
@@ -465,7 +468,12 @@ describe Minitest::Spec do
       assert_no_error { %Q{<label for="name">Username:</label>}.wont_have_tag('label[for=name]', /users/i) }
       
     end
-    
+
+    it 'should handle first matching tag with content when more then one tag found' do
+      assert_no_error { %Q{<tag>content1</tag><tag>content2</tag>}.must_have_tag('tag', 'content1') }
+    end
+
+
   end
   
 end

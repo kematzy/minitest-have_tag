@@ -52,11 +52,9 @@ module Minitest::Assertions
       
       if contents
         if contents.is_a?(String)
-          if res.inner_html == contents
-            matching = true
-          else
-            msg << " with contents [#{contents.inspect}], but the tag content is [#{res.inner_html}]"
+          unless res.any? { |tag| tag.inner_html == contents }
             matching = false
+            msg << " with contents [#{contents.inspect}], but the tags content found is [#{res.map(&:inner_html).join(', ')}]"
           end
         elsif contents.is_a?(Regexp)
           if res.inner_html =~ contents
