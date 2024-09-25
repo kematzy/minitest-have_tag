@@ -25,6 +25,13 @@ describe Minitest::Assertions do
 
       describe 'a basic <hr...> tag' do
         it 'with a class attribute' do
+          msg = [
+            'Expected "<hr class=\"divider\">" to NOT have tag ["hr[class]"],',
+            ' but such a tag was found'
+          ].join
+          assert_returns_error(msg) do
+            refute_have_tag('<hr class="divider">', 'hr[class]')
+          end
         end
 
         it 'with a class attribute with an incorrectly expected' do
