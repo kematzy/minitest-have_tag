@@ -57,14 +57,14 @@ group :development do
 end
 
 # Linux-specific gems
-install_if -> { RUBY_PLATFORM =~ /linux/ } do
+install_if -> { RUBY_PLATFORM.include?('linux') } do
   # Linux inotify wrapper for Ruby
   # DOCS: https://github.com/guard/rb-inotify
   gem 'rb-inotify', require: false
 end
 
 # macOS-specific gems
-install_if -> { RUBY_PLATFORM =~ /darwin/ } do
+install_if -> { RUBY_PLATFORM.include?('darwin') } do
   # FSEvents API with signals handled for macOS
   # DOCS: https://github.com/thibaudgg/rb-fsevent
   gem 'rb-fsevent', require: false

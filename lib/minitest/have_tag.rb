@@ -3,6 +3,7 @@
 require 'minitest'
 require 'minitest/have_tag/version'
 
+# rubocop:disable Style/Documentation
 module Minitest::Assertions
   require 'nokogiri'
 
@@ -178,7 +179,7 @@ module Minitest::Assertions
   # @return [Boolean] True if contents match the regular expression, false otherwise
   #
   def check_regexp_contents(res, contents, msg)
-    if res.inner_html =~ contents
+    if res.inner_html.match contents
       true
     else
       msg << " with inner_html [#{res.inner_html}],"
@@ -187,6 +188,7 @@ module Minitest::Assertions
     end
   end
 end
+# rubocop:enable Style/Documentation
 
 # add support for Spec syntax
 module Minitest::Expectations
