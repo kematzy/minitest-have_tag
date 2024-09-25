@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'coverage'
 require 'simplecov'
 
-def SimpleCov.minitest_have_tags_coverage(opts = {})
+def SimpleCov.minitest_have_tags_coverage(_opts = {})
   start do
     add_filter '/spec/'
     add_group('Missing') { |src| src.covered_percent < 100 }

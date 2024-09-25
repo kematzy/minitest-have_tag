@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 OSX = RUBY_PLATFORM.match(/darwin/)
 
 require 'bundler/gem_tasks'
@@ -9,7 +11,7 @@ Rake::TestTask.new(:spec) do |t|
   t.test_files = FileList['spec/**/*_spec.rb']
 end
 
-task :default => :spec
+task default: :spec
 
 desc 'Run specs with coverage'
 task :coverage do
@@ -21,7 +23,7 @@ end
 desc 'Run Rubocop report'
 task :rubocop do
   res = `which rubocop`
-  if res != ""
+  if res != ''
     `rubocop -f html -o ./rubocop/report.html lib/`
     `open rubocop/report.html` if OSX
   else

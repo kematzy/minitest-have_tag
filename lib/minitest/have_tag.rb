@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'minitest'
 require 'minitest/have_tag/version'
 
 module Minitest::Assertions
   require 'nokogiri'
-  
+
   # Method to test for existence of HTML tag, including contents, within the provided string.
   # 
   #     assert_have_tag('<br>', 'br')  #=> 
