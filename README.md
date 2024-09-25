@@ -27,6 +27,13 @@ Add this line to your application's Gemfile:
 gem 'minitest-have_tag'
 ```
 
+or
+
+```ruby
+gem 'minitest-have_tag', git: 'https://github.com/kematzy/minitest-have_tag', branch: 'master'
+```
+```
+
 And then execute:
 
 ```bash
@@ -152,7 +159,7 @@ This Gem depends upon the following:
 ### Development & Tests
 
 - bundler (~> 1.10)
-- rake (~> 10.0)
+- rake (~> 13.0)
 - minitest-hooks
 - minitest-rg
 
@@ -163,7 +170,10 @@ This Gem depends upon the following:
 ## Development
 
 After checking out the repo, run `bundle install` to install dependencies.
+
 Then, run `bundle exec rake spec` to run the tests.
+
+To run the tests automatically, run `bundle exec guard`.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 
