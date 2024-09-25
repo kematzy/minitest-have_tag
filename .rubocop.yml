@@ -1,3 +1,10 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-minitest
+  - rubocop-performance
+  - rubocop-rake
+
 # The behavior of RuboCop can be controlled via the .rubocop.yml
 # configuration file. It makes it possible to enable/disable
 # certain cops (checks) and to alter their behavior if they accept
@@ -9,8 +16,25 @@
 #
 # See https://docs.rubocop.org/rubocop/configuration
 
+AllCops:
+  TargetRubyVersion: "3.0"
+  NewCops: enable
+
+Layout/LineLength:
+  Exclude:
+    - "minitest-have_tag.gemspec"
+
 Metrics/BlockLength:
   Enabled: true
   Exclude:
-    - 'spec/**/*.rb'
-    - '**/*.gemspec'
+    - "spec/**/*.rb"
+    - "**/*.gemspec"
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - "lib/minitest/have_tag.rb"
+
+Style/Documentation:
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
