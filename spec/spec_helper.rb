@@ -11,7 +11,7 @@ $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 
 require 'rubygems'
 require 'minitest/autorun'
-require 'minitest/have_tag'
 require 'minitest/assert_errors'
+require 'minitest/have_tag'
 # require 'minitest/hooks/default'
 require 'minitest/rg'
