@@ -162,10 +162,11 @@ module Minitest::Assertions
   # @return [Boolean] True if contents match exactly, false otherwise
   #
   def check_string_contents(res, contents, msg)
-    if res.inner_html == contents
+    if res.any? { |tag| tag.inner_html == contents }
       true
     else
-      msg << " with contents [#{contents.inspect}], but the tag content is [#{res.inner_html}]"
+      msg << " with contents [#{contents.inspect}], but the tags content found "
+      msg << "is [#{res.map(&:inner_html).join(', ')}]"
       false
     end
   end

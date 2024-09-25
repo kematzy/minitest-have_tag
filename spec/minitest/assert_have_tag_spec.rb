@@ -111,7 +111,7 @@ describe Minitest::Assertions do
 
           msg = [
             'Expected "<label for=\\"name\\">contents</label>" to have tag ["label[for=name]"] ',
-            'with contents [""], but the tag content is [contents]'
+            'with contents [""], but the tags content found is [contents]'
           ].join
 
           assert_returns_error(msg) do
@@ -134,7 +134,7 @@ describe Minitest::Assertions do
 
           msg = [
             'Expected "<label for=\"name\">Username:</label>" to have tag ["label[for=name]"] ',
-            'with contents [""], but the tag content is [Username:]'
+            'with contents [""], but the tags content found is [Username:]'
           ].join
           assert_returns_error(msg) { assert_have_tag(html, 'label[for=name]', '') }
         end
@@ -166,6 +166,13 @@ describe Minitest::Assertions do
         end
       end
       # /a basic <label...> tag
+
+      it 'multiple tags when searching for contents' do
+        html = '<tag>content1</tag><tag>content2</tag>'
+
+        assert_no_error { assert_have_tag(html, 'tag', 'content1') }
+        assert_no_error { assert_have_tag(html, 'tag', 'content2') }
+      end
     end
     # /handles being passed
   end
