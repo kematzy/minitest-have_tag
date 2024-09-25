@@ -27,6 +27,10 @@ task :rubocop do
     `rubocop -f html -o ./rubocop/report.html lib/`
     `open rubocop/report.html` if OSX
   else
-    puts "\nERROR: 'rubocop' gem is not installed or available. Please install with 'gem install rubocop'."
+    puts <<~MSG
+      ERROR:#{' '}
+      rubocop gem is not installed or available.
+      Please install with "gem install rubocop"
+    MSG
   end
 end
