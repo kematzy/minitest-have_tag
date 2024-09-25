@@ -21,6 +21,9 @@ group :development do
   # Ruby testing framework
   # DOCS: https://github.com/seattlerb/minitest
   gem 'minitest', '~> 5.7', '>= 5.7.0'
+  # Adds specific assertions for testing exceptions with minitest
+  # DOCS: https://github.com/kematzy/minitest-assert_errors
+  gem 'minitest-assert_errors'
   # Around and before_all/after_all hooks for Minitest
   # DOCS: https://github.com/jeremyevans/minitest-hooks
   gem 'minitest-hooks', '~> 1.1', '>= 1.1.0'
