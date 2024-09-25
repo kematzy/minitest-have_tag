@@ -8,13 +8,14 @@ require 'rake/testtask'
 Rake::TestTask.new(:spec) do |t|
   t.libs << 'spec'
   t.libs << 'lib'
+  t.options = '--rg'
   t.test_files = FileList['spec/**/*_spec.rb']
 end
 
 task default: :spec
 
 desc 'Run specs with coverage'
-task :coverage do
+task 'spec:coverage' do
   ENV['COVERAGE'] = '1'
   Rake::Task['spec'].invoke
   `open coverage/index.html` if OSX
