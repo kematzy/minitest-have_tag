@@ -33,6 +33,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.platform         = Gem::Platform::RUBY
+  spec.extra_rdoc_files = ['README.md', 'MIT-LICENSE']
+  spec.rdoc_options += ['--quiet', '--line-numbers', '--inline-source', '--title',
+                        'Minitest::HaveTag: assertions for testing HTML output', '--main', 'README.md']
+
   spec.add_dependency('minitest', '~> 5.7', '>= 5.7.0')
   spec.add_dependency('nokogiri')
 
