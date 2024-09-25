@@ -5,12 +5,12 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in minitest-have_tag.gemspec
 gemspec
 
-group :development do
-  # adding these to silence warnings for Ruby v3.5
-  gem 'fiddle'
-  gem 'logger'
-  gem 'ostruct'
+# adding these to silence warnings for Ruby v3.5
+gem 'fiddle'
+gem 'logger'
+gem 'ostruct'
 
+group :development do
   # A command line tool to easily handle events on file system modifications
   # DOCS: https://github.com/guard/guard
   gem 'guard'
