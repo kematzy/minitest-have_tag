@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.platform         = Gem::Platform::RUBY
-  spec.extra_rdoc_files = ['README.md', 'MIT-LICENSE']
+  spec.extra_rdoc_files = ['README.md', 'LICENSE.txt']
   spec.rdoc_options += ['--quiet', '--line-numbers', '--inline-source', '--title',
                         'Minitest::HaveTag: assertions for testing HTML output', '--main', 'README.md']
 
