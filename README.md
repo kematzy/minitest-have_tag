@@ -2,6 +2,8 @@
 
 [![Ruby](https://github.com/kematzy/minitest-have_tag/actions/workflows/ruby.yml/badge.svg?branch=master)](https://github.com/kematzy/minitest-have_tag/actions/workflows/ruby.yml)
 
+[![Gem Version](https://badge.fury.io/rb/minitest-have_tag.svg)](https://badge.fury.io/rb/minitest-have_tag)
+
 [![Minitest Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-minitest)
 
 Adds methods to Minitest to test for existence of HTML tags, including contents,
