@@ -40,10 +40,13 @@ group :development do
   gem 'rubocop', '~> 1.31', require: false
   # Code style checking for Minitest files
   # DOCS: https://github.com/rubocop/rubocop-minitest
-  gem 'rubocop-minitest'
+  gem 'rubocop-minitest', require: false
   # Performance optimization analysis for your projects
   # DOCS: https://github.com/rubocop/rubocop-performance
-  gem 'rubocop-performance'
+  gem 'rubocop-performance', require: false
+  # A RuboCop extension focused on enforcing Rake best practices and coding conventions
+  # DOCS: https://github.com/rubocop/rubocop-rake
+  gem 'rubocop-rake', require: false
 
   # Code coverage for Ruby
   # DOCS: https://github.com/simplecov-ruby/simplecov
