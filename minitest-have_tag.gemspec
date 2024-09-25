@@ -36,11 +36,13 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'nokogiri'
 
   spec.add_development_dependency 'bundler' # , '~> 1.10'
-  spec.add_development_dependency 'rake' # , '~> 10.0'
-  # spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'minitest'
   spec.add_development_dependency 'minitest-assert_errors'
   spec.add_development_dependency 'minitest-hooks'
   spec.add_development_dependency 'minitest-rg'
   spec.add_development_dependency 'rack-test'
+  spec.add_development_dependency 'rake' # , '~> 10.0'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-minitest'
   spec.add_development_dependency 'simplecov'
 end
