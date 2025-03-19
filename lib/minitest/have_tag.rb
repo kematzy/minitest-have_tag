@@ -2,11 +2,10 @@
 
 require 'minitest'
 require 'minitest/have_tag/version'
+require 'nokogiri'
 
 # rubocop:disable Style/Documentation
 module Minitest::Assertions
-  require 'nokogiri'
-
   # Method to test for existence of HTML tag, including contents, within the provided string.
   #
   # This method asserts that a specific HTML tag or structure is present in the given HTML content.
@@ -17,7 +16,7 @@ module Minitest::Assertions
   # @param contents [String, Regexp, nil] Optional. The expected contents of the tag
   # @param msg [String, nil] Optional. Custom error message
   #
-  # @return [Boolean] True if the tag is found and matches the criteria
+  # @return [TrueClass] True if the tag is found and matches the criteria
   #
   # @example Basic usage
   #     assert_have_tag('<br>', 'br')
@@ -48,15 +47,15 @@ module Minitest::Assertions
   #       # Raises error: 'Expected "<br>" to have tag ["brr"], but no such tag was found'
   #
   def assert_have_tag(actual, expected, contents = nil, msg = nil)
-    msg = build_message(msg, actual, expected)
-    doc = Nokogiri::HTML(actual)
+    msg = have_tag_build_message(msg, actual, expected)
+    doc = have_tag_ensure_nokogiri_document(actual)
     res = doc.css(expected)
 
     if res.empty?
       msg << ', but no such tag was found'
       matching = false
     else
-      matching = check_contents(res, contents, msg)
+      matching = have_tag_check_contents(res, contents, msg)
     end
     assert matching, msg
   end
@@ -72,7 +71,7 @@ module Minitest::Assertions
   # @param contents [String, Regexp, nil] Optional. The expected contents of the tag
   # @param msg [String, nil] Optional. Custom error message
   #
-  # @return [Boolean] True if the tag is not found or doesn't match the criteria
+  # @return [TrueClass] True if the assertion passes, otherwise raises an error
   #
   # @example Basic usage
   #     refute_have_tag('<abbr>', 'br')  # Passes
@@ -103,15 +102,15 @@ module Minitest::Assertions
   #       # Raises error: 'Expected "<br>" to NOT have tag ["br"], but such a tag was found'
   #
   def refute_have_tag(actual, expected, contents = nil, msg = nil)
-    msg = build_message(msg, actual, expected, refute: true)
-    doc = Nokogiri::HTML(actual)
+    msg = have_tag_build_message(msg, actual, expected, refute: true)
+    doc = have_tag_ensure_nokogiri_document(actual)
     res = doc.css(expected)
 
     if res.empty?
       matching = false
     else
       msg << ', but such a tag was found'
-      matching = check_contents(res, contents, msg)
+      matching = have_tag_check_contents(res, contents, msg)
     end
     refute matching, msg
   end
@@ -127,9 +126,13 @@ module Minitest::Assertions
   #
   # @return [String] The formatted error message
   #
-  def build_message(msg, actual, expected, refute: false)
+  def have_tag_build_message(msg, actual, expected, refute: false)
     msg = msg.nil? ? '' : "#{msg}\n"
-    msg << "Expected #{actual.inspect} to #{refute ? 'NOT ' : ''}have tag [#{expected.inspect}]"
+
+    # Format the 'actual' value appropriately based on its type
+    actual_display = have_tag_nokogiri_document?(actual) ? '[Nokogiri Document]' : actual.inspect
+
+    msg << "Expected #{actual_display} to #{refute ? "NOT " : ""}have tag #{expected.inspect}"
   end
 
   # Checks the contents of the found tag against the expected contents
@@ -140,13 +143,13 @@ module Minitest::Assertions
   #
   # @return [Boolean] True if contents match, false otherwise
   #
-  def check_contents(res, contents, msg)
+  def have_tag_check_contents(res, contents, msg)
     return true unless contents
 
     if contents.is_a?(String)
-      check_string_contents(res, contents, msg)
+      have_tag_check_string_contents(res, contents, msg)
     elsif contents.is_a?(Regexp)
-      check_regexp_contents(res, contents, msg)
+      have_tag_check_regexp_contents(res, contents, msg)
     else
       msg << ", ERROR: contents is neither String nor Regexp, it's [#{contents.class}]"
       false
@@ -161,12 +164,12 @@ module Minitest::Assertions
   #
   # @return [Boolean] True if contents match exactly, false otherwise
   #
-  def check_string_contents(res, contents, msg)
+  def have_tag_check_string_contents(res, contents, msg)
     if res.any? { |tag| tag.inner_html == contents }
       true
     else
-      msg << " with contents [#{contents.inspect}], but the tags content found "
-      msg << "is [#{res.map(&:inner_html).join(', ')}]"
+      content_list = res.map(&:inner_html).join(', ')
+      msg << " with expected contents [#{contents.inspect}], but found [#{content_list}]"
       false
     end
   end
@@ -179,14 +182,40 @@ module Minitest::Assertions
   #
   # @return [Boolean] True if contents match the regular expression, false otherwise
   #
-  def check_regexp_contents(res, contents, msg)
-    if res.inner_html.match contents
+  def have_tag_check_regexp_contents(res, contents, msg)
+    if res.any? { |tag| tag.inner_html.match?(contents) }
       true
     else
-      msg << " with inner_html [#{res.inner_html}],"
+      content_list = res.map(&:inner_html).join(', ')
+      msg << " with contents [#{content_list}],"
       msg << " but did not match Regexp [#{contents.inspect}]"
       false
     end
+  end
+
+  # Ensures we have a Nokogiri document to work with
+  #
+  # @param actual [String, Nokogiri::HTML::Document, Nokogiri::XML::Document]
+  #        Either HTML string or Nokogiri document
+  #
+  # @return [Nokogiri::HTML::Document, Nokogiri::XML::Document] The Nokogiri document
+  #
+  def have_tag_ensure_nokogiri_document(actual)
+    if have_tag_nokogiri_document?(actual)
+      actual
+    else
+      Nokogiri::HTML(actual)
+    end
+  end
+
+  # Checks if the given object is a Nokogiri document
+  #
+  # @param obj [Object] Object to check
+  #
+  # @return [Boolean] true if object is a Nokogiri document
+  #
+  def have_tag_nokogiri_document?(obj)
+    obj.is_a?(Nokogiri::HTML::Document) || obj.is_a?(Nokogiri::XML::Document)
   end
 end
 # rubocop:enable Style/Documentation
