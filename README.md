@@ -4,6 +4,8 @@
 
 [![Ruby](https://github.com/kematzy/minitest-have_tag/actions/workflows/ruby.yml/badge.svg?branch=master)](https://github.com/kematzy/minitest-have_tag/actions/workflows/ruby.yml) - [![Gem Version](https://badge.fury.io/rb/minitest-have_tag.svg)](https://badge.fury.io/rb/minitest-have_tag) - [![Minitest Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-minitest)
 
+Coverage: **100%**
+
 Adds methods to Minitest to test for existence of HTML tags, including contents,
 within a provided string.
 
@@ -203,7 +205,7 @@ To release a new version:
 
 ## Contributing
 
-Bug reports and pull requests are welcome at [github.com/kematzy/minitest-snapshot](https://github.com/kematzy/minitest-snapshot).
+Bug reports and pull requests are welcome at [github.com/kematzy/minitest-have_tag](https://github.com/kematzy/minitest-have_tag/issues).
 
 ## Copyright
 
