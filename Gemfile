@@ -53,26 +53,30 @@ group :development do
 
   # Code coverage for Ruby
   # DOCS: https://github.com/simplecov-ruby/simplecov
-  gem 'simplecov'
-end
+  gem 'simplecov', require: false
 
-# Linux-specific gems
-install_if -> { RUBY_PLATFORM.include?('linux') } do
-  # Linux inotify wrapper for Ruby
-  # DOCS: https://github.com/guard/rb-inotify
-  gem 'rb-inotify', require: false
-end
+  # A Ruby language server that provides intellisense, code completion, and inline documentation
+  # DOCS: https://github.com/castwide/solargraph
+  gem 'solargraph'
 
-# macOS-specific gems
-install_if -> { RUBY_PLATFORM.include?('darwin') } do
-  # FSEvents API with signals handled for macOS
-  # DOCS: https://github.com/thibaudgg/rb-fsevent
-  gem 'rb-fsevent', require: false
-end
+  # Linux-specific gems
+  install_if -> { RUBY_PLATFORM.include?('linux') } do
+    # Linux inotify wrapper for Ruby
+    # DOCS: https://github.com/guard/rb-inotify
+    gem 'rb-inotify', require: false
+  end
 
-# Windows-specific gems
-install_if -> { Gem.win_platform? } do
-  # Windows Directory Monitor - A library which can be used to monitor directories for changes
-  # DOCS: https://github.com/Maher4Ever/wdm
-  gem 'wdm'
+  # macOS-specific gems
+  install_if -> { RUBY_PLATFORM.include?('darwin') } do
+    # FSEvents API with signals handled for macOS
+    # DOCS: https://github.com/thibaudgg/rb-fsevent
+    gem 'rb-fsevent', require: false
+  end
+
+  # Windows-specific gems
+  install_if -> { Gem.win_platform? } do
+    # Windows Directory Monitor - A library which can be used to monitor directories for changes
+    # DOCS: https://github.com/Maher4Ever/wdm
+    gem 'wdm'
+  end
 end
