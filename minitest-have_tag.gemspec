@@ -40,7 +40,7 @@ Gem::Specification.new do |spec|
                         'Minitest::HaveTag: assertions for testing HTML output', '--main', 'README.md']
 
   # register dependencies
-  spec.add_dependency('minitest', '>= 5.20.0', '< 6.0')
+  spec.add_dependency('minitest', '>= 5.20.0', '< 7.0')
   spec.add_dependency('nokogiri')
 
   # development dependencies are found in the Gemfile
